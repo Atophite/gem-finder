@@ -4,25 +4,47 @@
 
     let enabled: boolean = true;
 
+    export let data: Map<number, object>;
+
     function clickTile(): void {
+        let object = data.get(tileId)
         if(enabled) {
+            if(object['contentType'] === "bomb") {
+
+            }
             console.log(`Tile id: ${tileId} is clicked.`)
+            console.log(object['contentType'])
+            enabled = false
+            return object['contentType']
         }
         else {
             console.log(`Tile id: ${tileId} is not enabled`)
+            console.log(data.get(tileId))
         }
 
     }
 
 </script>
 
-<div id="{tileId}" on:click={clickTile} class="tile enabled-tile m-2 col">
-    <img src="bomb.svg" alt="svg of content" class="mt-2 ">
-</div>
+{#if enabled}
+    <div on:click={clickTile} class="tile enabled-tile m-2 col">
+
+    </div>
+    {:else}
+
+    <div on:click={clickTile} class="tile m-2 col">
+        {#if !enabled}
+            <img src={data.get(tileId)['contentType']+".svg"}  alt="svg of content" class="mt-2 mb-2 ">
+        {/if}
+
+    </div>
+    {/if}
+
 
 
 
 <style>
+
 
     @media screen and (min-width: 576px) {
         .tile{
@@ -32,7 +54,13 @@
 
     @media screen and (max-width: 575px) {
         .tile{
-            height: 50px;
+            height: 90px;
+        }
+    }
+
+    @media screen and (max-width: 475px) {
+        .tile{
+            height: auto
         }
     }
 

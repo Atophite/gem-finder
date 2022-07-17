@@ -1,7 +1,8 @@
 <script lang="ts">
 import Tile from "./Tile.svelte";
-import {getRandomInt} from "../helper/tilebox_helper"
+import {getRandomInt} from "../helper/helper"
 import {onMount} from "svelte";
+import TileBox from "./TileBox.svelte";
 
 
 let bombs: number = 13
@@ -11,19 +12,30 @@ let numberOfContents: number = bombs+gems
 
 let contentTypes: string[] = ["bomb", "gem"]
 
-let tileMap = new Map<number, object>()
+let tileMap
 
-let contentMap = new Map<number, string>()
+let contentMap
 
 let tileId: number = 0;
+
+let fail = false
+
 
 /**
 * adds an id when a Tile.svelte is being made.
 * @returns tileId
 */
 function addId(): number {
-    tileMap.set(tileId, {hasContent: false, contentType: null})
     return tileId++
+}
+
+function addTiles(): void {
+    for(let i=0; i <= numberOfContents-1; i++) {
+        tileMap.set(i ,{clicked: false, hasContent: false, contentType: null})
+        console.log("adding tile")
+    }
+
+
 }
 
 /**
@@ -69,38 +81,43 @@ function addTileContent(): void {
     while(contentMap.size !== numberOfContents) {
         randomInt = getRandomInt(0, numberOfContents-1)
 
-
         if(tileMap.get(randomInt)["hasContent"] === false) {
             contentType = getContentType()
             contentMap.set(randomInt, contentType)
-            tileMap.set(randomInt, {hasContent: true, contentType: contentType})
+            tileMap.set(randomInt, {clicked: false, hasContent: true, contentType: contentType})
         }
     }
 
 }
 
-onMount(async () => {
+export const createGame = () => {
+    console.log("creating new game")
+    tileMap = new Map<number, object>()
+    contentMap = new Map<number, string>()
+    addTiles()
     addTileContent()
-    console.log(tileMap)
-    console.log(contentMap)
-    console.log(numberOfContents)
+}
+
+onMount(async () => {
+    createGame()
 });
 
 </script>
 
-{#if tileId === numberOfContents-1}
-{/if}
+
 <div id="box" class="container">
     {#each Array(5) as _, x}
         <div class="row">
             {#each Array(5) as _, i}
-                <Tile tileId="{addId()}"/>
+                <Tile tileId="{addId()}" data="{tileMap}"/>
             {/each}
 
         </div>
 
     {/each}
 </div>
+
+
 
 <style>
 
@@ -120,6 +137,9 @@ onMount(async () => {
 
     #box{
         background-color: #282828;
+    }
 
+    .hide {
+        display: none
     }
 </style>
