@@ -1,6 +1,7 @@
-<script>
+<script lang="ts">
 import TileBox from "../components/TileBox.svelte";
 
+let games: number = 0
 
 </script>
 
@@ -9,10 +10,10 @@ import TileBox from "../components/TileBox.svelte";
         <h1 class="mt-4 col">Find the 12 gems</h1>
     </div>
     <div class="row text-center">
-        <p class="mt-1 col">Tries: 43</p>
+        <p class="mt-1 col">Tries: {games}</p>
     </div>
 </div>
-<TileBox/>
+<TileBox bind:gameNumber={games}/>
 
 
 <style>

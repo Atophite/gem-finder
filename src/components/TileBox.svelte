@@ -12,13 +12,14 @@ let numberOfContents: number = bombs+gems
 
 let contentTypes: string[] = ["bomb", "gem"]
 
-let tileMap
+let tileMap = new Map<number, object>()
 
-let contentMap
+let contentMap = new Map<number, string>()
 
 let tileId: number = 0;
 
-let fail = false
+export let gameNumber = 0
+
 
 
 /**
@@ -75,6 +76,7 @@ function getContentType(): string {
 
 
 function addTileContent(): void {
+    console.log(tileMap)
     let randomInt: number
     let contentType: string
 
@@ -90,12 +92,18 @@ function addTileContent(): void {
 
 }
 
-export const createGame = () => {
+function createGame(): void {
     console.log("creating new game")
-    tileMap = new Map<number, object>()
-    contentMap = new Map<number, string>()
+    tileId = 0
+    gems = 12
+    bombs = 13
+    tileMap.clear()
+    contentMap.clear()
     addTiles()
     addTileContent()
+    gameNumber++
+
+
 }
 
 onMount(async () => {
@@ -104,18 +112,22 @@ onMount(async () => {
 
 </script>
 
+{#key gameNumber}
+    <div id="box" class="container">
+        {#each Array(5) as _, x}
+            <div class="row">
+                {#each Array(5) as _, i}
 
-<div id="box" class="container">
-    {#each Array(5) as _, x}
-        <div class="row">
-            {#each Array(5) as _, i}
-                <Tile tileId="{addId()}" data="{tileMap}"/>
-            {/each}
+                    <Tile reloadGame="{() => createGame()}" tileId="{addId()}" data="{tileMap}"/>
+                {/each}
 
-        </div>
+            </div>
 
-    {/each}
-</div>
+        {/each}
+    </div>
+{/key}
+
+
 
 
 

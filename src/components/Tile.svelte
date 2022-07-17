@@ -6,15 +6,18 @@
 
     export let data: Map<number, object>;
 
+    export let reloadGame = () => {}
+
     function clickTile(): void {
         let object = data.get(tileId)
         if(enabled) {
-            if(object['contentType'] === "bomb") {
 
-            }
             console.log(`Tile id: ${tileId} is clicked.`)
             console.log(object['contentType'])
             enabled = false
+            if(object['contentType'] === "bomb") {
+                reloadGame()
+            }
             return object['contentType']
         }
         else {
@@ -24,6 +27,7 @@
 
     }
 
+    console.log(data.get(0))
 </script>
 
 {#if enabled}
