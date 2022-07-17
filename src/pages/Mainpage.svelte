@@ -1,9 +1,7 @@
-
-
 <script>
-
-
 import TileBox from "../components/TileBox.svelte";
+
+
 </script>
 
 <div class="container">

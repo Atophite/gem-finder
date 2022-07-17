@@ -1,16 +1,25 @@
-<script>
+<script lang="ts">
 
-    export let tileId;
+    export let tileId: number;
 
-    function clickTile() {
-        console.log(`Tile id: ${tileId} is clicked.`)
+    let enabled: boolean = true;
+
+    function clickTile(): void {
+        if(enabled) {
+            console.log(`Tile id: ${tileId} is clicked.`)
+        }
+        else {
+            console.log(`Tile id: ${tileId} is not enabled`)
+        }
+
     }
 
 </script>
 
-<div id="{tileId}" class="tile m-2 col">
-    <object data="gem.svg" width="65" height="65"></object>
+<div id="{tileId}" on:click={clickTile} class="tile enabled-tile m-2 col">
+    <img src="bomb.svg" alt="svg of content" class="mt-2 ">
 </div>
+
 
 
 <style>
@@ -27,7 +36,8 @@
         }
     }
 
-    .tile:hover{
+
+    .enabled-tile:hover{
         background-color: #6C6B6B;
         cursor: pointer;
     }
