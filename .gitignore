@@ -27,3 +27,5 @@ dist-ssr
 /workspace.xml
 # Editor-based HTTP Client requests
 /httpRequests/
+
+gh-pages.js
