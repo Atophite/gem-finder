@@ -64,7 +64,13 @@
 
     @media screen and (max-width: 475px) {
         .tile{
-            height: auto
+            height: 50px
+        }
+    }
+
+    @media screen and (max-width: 300px) {
+        .tile{
+            height: 40px
         }
     }
 

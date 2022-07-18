@@ -20,7 +20,7 @@
 
 <main>
 
-  <svelte:component this="{page}" {params}/>
+  <Mainpage/>
 
 </main>
 

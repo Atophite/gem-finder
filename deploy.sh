@@ -1,10 +1,26 @@
-# Build the application
+#!/usr/bin/env sh
+
+# abort on errors
+set -e
+
+# build
 npm run build
 
-# Commit and push the changes
-git add .
-git commit -m "initial gh-pages commit"
-git push -f origin gh-pages
+# navigate into the build output directory
+cd dist
 
-# Deploy the code with the gh-pages module
-node ./gh-pages.js
+# if you are deploying to a custom domain
+# echo 'www.example.com' > CNAME
+
+git init
+git checkout -b main
+git add -A
+git commit -m 'deploy'
+
+# if you are deploying to https://<USERNAME>.github.io
+# git push -f git@github.com:<USERNAME>/<USERNAME>.github.io.git main
+
+# if you are deploying to https://<USERNAME>.github.io/<REPO>
+git push -f git@github.com:Atophite/gem-finder.git main:gh-pages
+
+cd -
