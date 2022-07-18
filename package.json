@@ -1,5 +1,5 @@
 {
-  "homepage" : "https://atophite.github.io/gem-finder",
+  "homepage": "https://atophite.github.io/gem-finder",
   "name": "gemapp",
   "private": true,
   "version": "0.0.0",
@@ -11,17 +11,24 @@
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "deploy": "node ./gh-pages.js",
-    "clean": "trash build"
+    "clean": "trash build",
+    "test": "ts-mocha -n loader=ts-node/esm -p tsconfig.json test/**/*.test.ts"
   },
   "devDependencies": {
     "@sveltejs/adapter-static": "^1.0.0-next.37",
     "@sveltejs/vite-plugin-svelte": "^1.0.1",
     "@tsconfig/svelte": "^3.0.0",
+    "@types/expect": "^24.3.0",
+    "@types/mocha": "^9.1.1",
+    "chai": "^4.3.6",
     "gh-pages": "^4.0.0",
+    "mocha": "^10.0.0",
     "svelte": "^3.49.0",
     "svelte-check": "^2.8.0",
     "svelte-preprocess": "^4.10.7",
     "trash-cli": "^5.0.0",
+    "ts-mocha": "^10.0.0",
+    "ts-node": "^10.9.1",
     "tslib": "^2.4.0",
     "typescript": "^4.6.4",
     "vite": "^3.0.0"

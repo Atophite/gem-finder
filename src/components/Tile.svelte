@@ -12,8 +12,6 @@
         let object = data.get(tileId)
         if(enabled) {
 
-            console.log(`Tile id: ${tileId} is clicked.`)
-            console.log(object['contentType'])
             enabled = false
             if(object['contentType'] === "bomb") {
                 reloadGame()
@@ -22,12 +20,10 @@
         }
         else {
             console.log(`Tile id: ${tileId} is not enabled`)
-            console.log(data.get(tileId))
         }
 
     }
 
-    console.log(data.get(0))
 </script>
 
 {#if enabled}
