@@ -1,3 +1,5 @@
+# GO TO https://atophite.github.io/gem-finder/ TO PLAY THE GAME
+
 # Svelte + TS + Vite
 
 This template should help get you started developing with Svelte and TypeScript in Vite.
