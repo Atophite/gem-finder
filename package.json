@@ -11,7 +11,7 @@
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
     "deploy": "node ./gh-pages.js",
-    "clean": "trash build",
+    "clean": "trash dist",
     "test": "ts-mocha -n loader=ts-node/esm -p tsconfig.json test/**/*.test.ts",
     "new-test": "mocha -r ts-node/register test/**/*.test.ts"
   },

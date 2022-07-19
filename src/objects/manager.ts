@@ -1,6 +1,6 @@
 import {getRandomInt} from "../helper/helper.js";
 
-export class GemFinderManager {
+class GemFinderManager {
     bombs: number
     gems: number
     numberOfContents: number
@@ -91,6 +91,6 @@ export class GemFinderManager {
     }
 }
 
-export default {GemFinderManager}
+export {GemFinderManager}
 
 

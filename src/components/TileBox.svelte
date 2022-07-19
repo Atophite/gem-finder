@@ -72,7 +72,4 @@ onMount(async () => {
         background-color: #282828;
     }
 
-    .hide {
-        display: none
-    }
 </style>

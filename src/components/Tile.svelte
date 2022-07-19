@@ -35,7 +35,7 @@
 {:else if !enabled}
 
         <div on:click={clickTile} class="tile m-2 col tile-click">
-            <img src={data.get(tileId)['contentType']+".svg"}  alt="svg of content" class="mt-2 mb-2 tile-click fade-in content">
+            <img src={data.get(tileId)['contentType']+".svg"}  alt="svg of content" class="mt-2 mb-2 tile-click fade-in rotate">
         </div>
 {/if}
 
@@ -87,7 +87,7 @@
         background-color: #3C3C3C;
     }
 
-    .content{
+    .rotate{
         transform: rotate(180deg);
     }
 
