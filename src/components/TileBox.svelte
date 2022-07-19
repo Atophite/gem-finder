@@ -11,6 +11,7 @@ let gems: number = 12
 
 export let gameNumber = 0
 
+
 let manager: GemFinderManager = new GemFinderManager(bombs, gems)
 
 
@@ -26,6 +27,7 @@ function restartGame(): void {
     gameNumber++
 }
 
+
 onMount(async () => {
     // createGame(false)
 });
@@ -33,14 +35,13 @@ onMount(async () => {
 </script>
 
 {#key gameNumber}
+
     <div id="box" class="container">
         {#each Array(5) as _, x}
             <div class="row">
                 {#each Array(5) as _, i}
-
                     <Tile reloadGame="{() => restartGame()}" tileId="{addId()}" data="{manager.tileMap}"/>
                 {/each}
-
             </div>
 
         {/each}

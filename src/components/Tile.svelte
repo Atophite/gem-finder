@@ -8,6 +8,7 @@
 
     export let reloadGame = () => {}
 
+
     function clickTile(): void {
         let object = data.get(tileId)
         if(enabled) {
@@ -26,21 +27,17 @@
 
 </script>
 
+
 {#if enabled}
     <div on:click={clickTile} class="tile enabled-tile m-2 col">
 
     </div>
-    {:else}
+{:else if !enabled}
 
-    <div on:click={clickTile} class="tile m-2 col">
-        {#if !enabled}
-            <img src={data.get(tileId)['contentType']+".svg"}  alt="svg of content" class="mt-2 mb-2 ">
-        {/if}
-
-    </div>
-    {/if}
-
-
+        <div on:click={clickTile} class="tile m-2 col tile-click">
+            <img src={data.get(tileId)['contentType']+".svg"}  alt="svg of content" class="mt-2 mb-2 tile-click fade-in content">
+        </div>
+{/if}
 
 
 <style>
@@ -70,6 +67,16 @@
         }
     }
 
+    .tile-click{
+        -webkit-animation: flip-horizontal-bottom 0.4s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+        animation: flip-horizontal-bottom 0.4s cubic-bezier(0.455, 0.030, 0.515, 0.955) both;
+    }
+
+    .fade-in {
+        -webkit-animation: fade-in 0.1s cubic-bezier(0.390, 0.575, 0.565, 1.000) 0.2s both;
+        animation: fade-in 0.1s cubic-bezier(0.390, 0.575, 0.565, 1.000) 0.2s both;
+    }
+
 
     .enabled-tile:hover{
         background-color: #6C6B6B;
@@ -79,4 +86,11 @@
     .tile{
         background-color: #3C3C3C;
     }
+
+    .content{
+        transform: rotate(180deg);
+    }
+
+
+
 </style>

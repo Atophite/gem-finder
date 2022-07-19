@@ -1,6 +1,6 @@
-import {getRandomInt} from "../helper/helper";
+import {getRandomInt} from "../helper/helper.js";
 
-class GemFinderManager {
+export class GemFinderManager {
     bombs: number
     gems: number
     numberOfContents: number
@@ -68,27 +68,29 @@ class GemFinderManager {
         if(content === "gem") {
             if(this.gems > 0) {
                 this.gems--
-                return content
+                return "gem"
             }
 
             else if(this.bombs > 0) {
                 this.bombs--
-                return content
+                return "bomb"
             }
         }
 
         if(content === "bomb") {
             if(this.bombs > 0) {
                 this.bombs--
-                return content
+                return "bomb"
             }
 
             else if(this.gems > 0) {
                 this.gems--
-                return content
+                return "gem"
             }
         }
     }
 }
 
-export {GemFinderManager}
+export default {GemFinderManager}
+
+
