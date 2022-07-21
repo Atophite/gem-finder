@@ -12,7 +12,7 @@ let gems: number = 12
 export let gameNumber = 0
 
 
-let manager: GemFinderManager = new GemFinderManager(bombs, gems)
+let manager: GemFinderManager = new GemFinderManager(bombs,gems)
 
 let boxIsClicked: boolean = false
 

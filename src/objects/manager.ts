@@ -4,6 +4,9 @@ class GemFinderManager {
     totalOfBombs: number
     totalOfGems: number
     gemsLeftInGame: number
+    
+    gemsLeftToDivide: number
+    bombsLeftToDivide: number
 
     numberOfContents: number
     contentTypes: string[]
@@ -18,6 +21,10 @@ class GemFinderManager {
     constructor(bombs, gems) {
         this.totalOfBombs = bombs
         this.totalOfGems = gems
+        
+        this.gemsLeftToDivide = gems
+        this.bombsLeftToDivide = bombs
+        
         this.gemsLeftInGame = gems
         this.numberOfContents = bombs + gems
         this.contentTypes = ["bomb", "gem"]
@@ -35,6 +42,8 @@ class GemFinderManager {
     restartGame(bombs: number, gems: number): void {
         this.totalOfBombs = bombs
         this.totalOfGems = gems
+        this.gemsLeftToDivide = gems
+        this.bombsLeftToDivide = bombs
         this.numberOfContents = bombs + gems
         this.contentTypes = ["bomb", "gem"]
         this.tileMap.clear()
@@ -45,8 +54,6 @@ class GemFinderManager {
 
         this.addTiles()
         this.addTileContent()
-
-
     }
 
 
@@ -74,30 +81,28 @@ class GemFinderManager {
     getContentType(): string {
         let randomInt: number = getRandomInt(0,1)
         let content: string = this.contentTypes[randomInt]
-
-        let gemsLeftToDivide: number = this.totalOfGems
-        let bombsLeftToDivide: number = this.totalOfBombs
+        
 
         if(content === "gem") {
-            if(gemsLeftToDivide > 0) {
-                gemsLeftToDivide--
+            if(this.gemsLeftToDivide > 0) {
+                this.gemsLeftToDivide--
                 return "gem"
             }
 
-            else if(bombsLeftToDivide > 0) {
-                bombsLeftToDivide--
+            else if(this.bombsLeftToDivide > 0) {
+                this.bombsLeftToDivide--
                 return "bomb"
             }
         }
 
         if(content === "bomb") {
-            if(bombsLeftToDivide > 0) {
-                bombsLeftToDivide--
+            if(this.bombsLeftToDivide > 0) {
+                this.bombsLeftToDivide--
                 return "bomb"
             }
 
-            else if(gemsLeftToDivide > 0) {
-                bombsLeftToDivide--
+            else if(this.gemsLeftToDivide > 0) {
+                this.gemsLeftToDivide--
                 return "gem"
             }
         }
