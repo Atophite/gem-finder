@@ -29,6 +29,6 @@
   main{
     background-color: #3C3C3C;
     min-height: 100vh;
-    min-width: 100px;
+    min-width: 100%;
   }
 </style>

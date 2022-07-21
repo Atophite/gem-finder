@@ -34,22 +34,22 @@
 
     {#if enabled}
     <div on:click={clickTile} class="tile m-2 col d-flex justify-content-center">
-        <img src={data.get(tileId)['contentType']+".svg"}  alt="svg of content" class="mt-2 mb-2 grey-out-content">
+        <img src={data.get(tileId)['contentType']+".svg"} alt="svg of content" class="grey-out-content mt-2">
     </div>
     {:else}
-        <div on:click={clickTile} class="tile m-2 col justify-content-center">
-            <img src={data.get(tileId)['contentType']+".svg"}  alt="svg of content" class="mt-2 mb-2">
+        <div on:click={clickTile} class="tile m-2 col d-flex justify-content-center">
+            <img src={data.get(tileId)['contentType']+".svg"}  alt="svg of content" class="content">
         </div>
     {/if}
 
 {:else if enabled}
-    <div on:click={clickTile} class="tile enabled-tile m-2 col justify-content-center">
+    <div on:click={clickTile} class="tile enabled-tile m-2 col">
 
     </div>
 {:else if !enabled}
 
-    <div on:click={clickTile} class="tile m-2 col tile-click justify-content-center">
-        <img src={data.get(tileId)['contentType']+".svg"}  alt="svg of content" class="mt-2 mb-2 tile-click fade-in rotate mb-2">
+    <div on:click={clickTile} class="tile m-2 col d-flex justify-content-center tile-click">
+        <img src={data.get(tileId)['contentType']+".svg"}  alt="svg of content" class="tile-click fade-in rotate content">
     </div>
 {/if}
 
@@ -116,8 +116,8 @@
 
     .grey-out-content{
         opacity: 0.3;
-        width: 85%;
-        height: 85%;
+        width: 80%;
+        height: 80%;
     }
 
 

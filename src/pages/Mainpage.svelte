@@ -14,7 +14,9 @@ let gems: number
         <p class="mt-1 col">Tries: {games}</p>
     </div>
 </div>
+
 <TileBox bind:gameNumber={games}/>
+
 
 
 <style>
