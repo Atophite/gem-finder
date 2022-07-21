@@ -2,6 +2,7 @@
 import TileBox from "../components/TileBox.svelte";
 
 let games: number = 0
+let gems: number
 
 </script>
 

@@ -1,23 +1,31 @@
 import {getRandomInt} from "../helper/helper.js";
 
 class GemFinderManager {
-    bombs: number
-    gems: number
+    totalOfBombs: number
+    totalOfGems: number
+    gemsLeftInGame: number
+
     numberOfContents: number
     contentTypes: string[]
     tileMap: Map<number, object>
     contentMap: Map<number, string>
     tileId: number
+    gameOver: boolean
+
+
 
 
     constructor(bombs, gems) {
-        this.bombs = bombs
-        this.gems = gems
+        this.totalOfBombs = bombs
+        this.totalOfGems = gems
+        this.gemsLeftInGame = gems
         this.numberOfContents = bombs + gems
         this.contentTypes = ["bomb", "gem"]
         this.tileMap = new Map<number, object>()
         this.contentMap = new Map<number, string>()
         this.tileId = 0
+        this.gameOver = false
+
 
         this.addTiles()
         this.addTileContent()
@@ -25,13 +33,15 @@ class GemFinderManager {
     }
 
     restartGame(bombs: number, gems: number): void {
-        this.bombs = bombs
-        this.gems = gems
+        this.totalOfBombs = bombs
+        this.totalOfGems = gems
         this.numberOfContents = bombs + gems
         this.contentTypes = ["bomb", "gem"]
         this.tileMap.clear()
         this.contentMap.clear()
         this.tileId = 0
+        this.gameOver = false
+        this.gemsLeftInGame = gems
 
         this.addTiles()
         this.addTileContent()
@@ -65,26 +75,29 @@ class GemFinderManager {
         let randomInt: number = getRandomInt(0,1)
         let content: string = this.contentTypes[randomInt]
 
+        let gemsLeftToDivide: number = this.totalOfGems
+        let bombsLeftToDivide: number = this.totalOfBombs
+
         if(content === "gem") {
-            if(this.gems > 0) {
-                this.gems--
+            if(gemsLeftToDivide > 0) {
+                gemsLeftToDivide--
                 return "gem"
             }
 
-            else if(this.bombs > 0) {
-                this.bombs--
+            else if(bombsLeftToDivide > 0) {
+                bombsLeftToDivide--
                 return "bomb"
             }
         }
 
         if(content === "bomb") {
-            if(this.bombs > 0) {
-                this.bombs--
+            if(bombsLeftToDivide > 0) {
+                bombsLeftToDivide--
                 return "bomb"
             }
 
-            else if(this.gems > 0) {
-                this.gems--
+            else if(gemsLeftToDivide > 0) {
+                bombsLeftToDivide--
                 return "gem"
             }
         }

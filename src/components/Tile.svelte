@@ -8,6 +8,8 @@
 
     export let reloadGame = () => {}
 
+    export let gameOver
+
 
     function clickTile(): void {
         let object = data.get(tileId)
@@ -15,7 +17,8 @@
 
             enabled = false
             if(object['contentType'] === "bomb") {
-                reloadGame()
+                gameOver = true
+                //reloadGame()
             }
             return object['contentType']
         }
@@ -27,17 +30,32 @@
 
 </script>
 
+{#if gameOver}
 
-{#if enabled}
-    <div on:click={clickTile} class="tile enabled-tile m-2 col">
+    {#if enabled}
+    <div on:click={clickTile} class="tile m-2 col d-flex justify-content-center">
+        <img src={data.get(tileId)['contentType']+".svg"}  alt="svg of content" class="mt-2 mb-2 grey-out-content">
+    </div>
+    {:else}
+        <div on:click={clickTile} class="tile m-2 col justify-content-center">
+            <img src={data.get(tileId)['contentType']+".svg"}  alt="svg of content" class="mt-2 mb-2">
+        </div>
+    {/if}
+
+{:else if enabled}
+    <div on:click={clickTile} class="tile enabled-tile m-2 col justify-content-center">
 
     </div>
 {:else if !enabled}
 
-        <div on:click={clickTile} class="tile m-2 col tile-click">
-            <img src={data.get(tileId)['contentType']+".svg"}  alt="svg of content" class="mt-2 mb-2 tile-click fade-in rotate">
-        </div>
+    <div on:click={clickTile} class="tile m-2 col tile-click justify-content-center">
+        <img src={data.get(tileId)['contentType']+".svg"}  alt="svg of content" class="mt-2 mb-2 tile-click fade-in rotate mb-2">
+    </div>
 {/if}
+
+
+
+
 
 
 <style>
@@ -83,12 +101,23 @@
         cursor: pointer;
     }
 
+    .content{
+        width: 100%;
+        height: 100%
+    }
+
     .tile{
         background-color: #3C3C3C;
     }
 
     .rotate{
         transform: rotate(180deg);
+    }
+
+    .grey-out-content{
+        opacity: 0.3;
+        width: 85%;
+        height: 85%;
     }
 
 
