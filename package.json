@@ -10,10 +10,9 @@
     "build-svelte": "npm run clean && vite build",
     "preview": "vite preview",
     "check": "svelte-check --tsconfig ./tsconfig.json",
-    "deploy": "node ./gh-pages.js",
+    "deploy": "sh deploy.sh",
     "clean": "trash dist",
-    "test": "ts-mocha -n loader=ts-node/esm -p tsconfig.json test/**/*.test.ts",
-    "new-test": "mocha -r ts-node/register test/**/*.test.ts"
+    "test": "ts-mocha -n loader=ts-node/esm -p tsconfig.json test/**/*.test.ts"
   },
   "devDependencies": {
     "@sveltejs/adapter-static": "^1.0.0-next.37",
