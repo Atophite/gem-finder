@@ -1,22 +1,10 @@
 <script lang="ts">
 import Tile from "./Tile.svelte";
-import {getRandomInt} from "../helper/helper"
-import {onMount} from "svelte";
-import TileBox from "./TileBox.svelte";
 import {GemFinderManager} from "../objects/manager"
 
-
-let bombs: number = 13
-let gems: number = 12
-
 export let gameNumber = 0
-
-
-let manager: GemFinderManager = new GemFinderManager(bombs,gems)
-
+export let manager: GemFinderManager
 let boxIsClicked: boolean = false
-
-
 
 function addId(): number {
     return manager.tileId++
@@ -25,7 +13,7 @@ function addId(): number {
 function restartGame(): void {
     console.log("creating new game")
 
-    manager.restartGame(bombs, gems)
+    manager.restartGame(manager.totalOfBombs, manager.totalOfGems)
     gameNumber++
     boxIsClicked = false
 }
@@ -43,10 +31,6 @@ function gameOver(): void{
 }
 
 
-onMount(async () => {
-    // createGame(false)
-});
-
 </script>
 
 {#key gameNumber}
@@ -54,17 +38,13 @@ onMount(async () => {
         {#each Array(5) as _, x}
             <div class="row">
                 {#each Array(5) as _, i}
-                    <Tile reloadGame="{gameOver}" tileId="{addId()}" data="{manager.tileMap}" bind:gameOver="{manager.gameOver}"/>
+                    <Tile bind:gems={manager.gemsLeftInGame} tileId="{addId()}" data="{manager.tileMap}" bind:gameOver="{manager.gameOver}"/>
                 {/each}
             </div>
         {/each}
     </div>
 
 {/key}
-
-
-
-
 
 <style>
 
@@ -85,7 +65,5 @@ onMount(async () => {
     .tile-box{
         background-color: #282828;
     }
-
-
 
 </style>

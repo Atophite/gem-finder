@@ -6,9 +6,9 @@
 
     export let data: Map<number, object>;
 
-    export let reloadGame = () => {}
-
     export let gameOver
+
+    export let gems: number;
 
 
     function clickTile(): void {
@@ -18,14 +18,14 @@
             enabled = false
             if(object['contentType'] === "bomb") {
                 gameOver = true
-                //reloadGame()
             }
-            return object['contentType']
+            else if(object['contentType'] === "gem") {
+                gems--
+                if(gems === 0) {
+                    gameOver = true
+                }
+            }
         }
-        else {
-            console.log(`Tile id: ${tileId} is not enabled`)
-        }
-
     }
 
 </script>
@@ -52,10 +52,6 @@
         <img src={data.get(tileId)['contentType']+".svg"}  alt="svg of content" class="tile-click fade-in rotate content">
     </div>
 {/if}
-
-
-
-
 
 
 <style>
